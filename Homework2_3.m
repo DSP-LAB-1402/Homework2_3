@@ -109,9 +109,22 @@ end
 % Part 6:
 %
 % Here we want to extract the deepest approximated layer
+% and we want to plot them
+
+approx_coeff = appcoef(waveletCoefficients, waveletLevels, 'db10', 10);
+figure('Name', 'Approximation Coefficients');
+stem(approx_coeff, 'LineWidth', 1.5);
+title('Approximation Coefficients');
+xlabel('Time');
+ylabel('Amplitude');
+grid on;
+
+%%%
+% Part 7:
+%
+% Here we want to extract approximated coefficient from wavelet coefficient
 % and then we want to reconstruct signal from approximated
 % and detailed coefficient and then see how much is the error
-% and at last we want to plot them
 approx_coeff_deepest_layer = appcoef( ...
     waveletCoefficients, ...
     waveletLevels, ...
@@ -120,11 +133,6 @@ approx_coeff_deepest_layer = appcoef( ...
 );
 wavelet_coefficients_regenerated = ...
     [approx_coeff_deepest_layer, detailed_coeff{numberOfLevels:-1:1}];
-%%%
-% Part 7:
-%
-% Here we want to extract approximated coefficient from wavelet coefficient
-
 fprintf("\nError: %d\n", ...
     sum(abs(wavelet_coefficients_regenerated - waveletCoefficients)));
 figure('Name', 'Wavelet Coefficients vs Regenerated Wavelet Coefficients');
@@ -143,31 +151,6 @@ ylabel('Amplitude');
 grid on;
 axis tight;
 
-% DetCoef = detcoef(waveletCoefficients, waveletLevels, [1 2 3]);
-% figure('Name', 'Wavelet Coefficients of Level 1 and 2');
-% subplot(311);
-% stem(DetCoef{1}, 'LineWidth', 1.5);
-% title('Wavelet Coefficients of Level 1 ');
-% xlabel('Time');
-% ylabel('Amplitude');
-% grid on;
-% subplot(312);
-% stem(DetCoef{2}, 'LineWidth', 1.5);
-% title('Wavelet Coefficients of Level 2');
-% xlabel('Time');
-% ylabel('Amplitude');
-% grid on;
-% subplot(313);
-% stem(DetCoef{3}, 'LineWidth', 1.5);
-% title('Wavelet Coefficients of Level 3 ');
-% xlabel('Time');
-% ylabel('Amplitude');
-% grid on;
-%%%
-% Part 8:
-%
-% We want to calculate approximated coefficient of each level
-
 approx_coeff = appcoef(waveletCoefficients, waveletLevels, 'db10', 10);
 figure('Name', 'Approximation Coefficients');
 stem(approx_coeff, 'LineWidth', 1.5);
@@ -176,6 +159,10 @@ xlabel('Time');
 ylabel('Amplitude');
 grid on;
 
+%%%
+% Part 8:
+%
+% We want to calculate approximated coefficient of each level
 figure('Name', 'Wavelet Coefficients of Different Levels');
 set(gcf, 'Position', [100, 100, 1000, 1000]);
 
