@@ -1,11 +1,11 @@
-%% * Homework2_3 *
+%% *Homework2_3*
 %% Programmers
 % Mohammad Mahdi Elyasi - 9823007
 %
 % Moein Nasiri - 9823093
 %% Clear Workspace
-Close all;
-Clear;
+close all;
+clear;
 clc;
 %% Homework_1
 %%%
@@ -55,7 +55,7 @@ ylabel('Amplitude');
 grid on;
 
 %%%
-% Part3:
+% Part 3:
 %
 % Here we want to extract Coefficients of our noisy signal and then plot them
 
@@ -78,7 +78,7 @@ axis tight;
 %%%
 % Part 4:
 %
-% Here we want to extract to 10th level of coefficients and plot them
+% Here we want to extract wavelet coefficients and plot
 numberOfLevels = 10;
 [waveletCoefficients, waveletLevels] = wavedec(noisy_x, 10, 'db10');
 figure('Name', 'Wavelet Coefficients');
@@ -151,14 +151,6 @@ ylabel('Amplitude');
 grid on;
 axis tight;
 
-approx_coeff = appcoef(waveletCoefficients, waveletLevels, 'db10', 10);
-figure('Name', 'Approximation Coefficients');
-stem(approx_coeff, 'LineWidth', 1.5);
-title('Approximation Coefficients');
-xlabel('Time');
-ylabel('Amplitude');
-grid on;
-
 %%%
 % Part 8:
 %
@@ -212,7 +204,7 @@ legend('Original Signal', 'Reconstructed Signal');
 %%%
 % Part 10:
 %
-% here we want to denoise the signal and compare it with original and noisy signal
+% Here we want to denoise the signal and compare it with original and noisy signal
 denoised_x = wdenoise(noisy_x, 10);
 
 figure('Name', 'Doppler Signal with White Noise vs Denoised Heavy Sine Signal');
