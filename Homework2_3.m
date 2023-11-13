@@ -186,9 +186,9 @@ wavelet_coefficients_regenerated = ...
     [approx_coeff_deepest, detailed_coeff{numberOfLevels1:-1:1}];
 
 x_rec = waverec(waveletCoefficients, waveletLevels, 'db10');
-length1 = idwt(approx_coeff_deepest, zeros(1, 144), 'db10');
-length2 = idwt(length1, zeros(1, 270), 'db10');
-length3 = idwt(length2, zeros(1, 522), 'db10');
+CA2 = idwt(approx_coeff_deepest, zeros(1, 144), 'db10');
+CA1 = idwt(CA2, zeros(1, 270), 'db10');
+rec_signal = idwt(CA1, zeros(1, 522), 'db10');
 
 loc_re = linspace(0, 1, 2 ^ N + 2);
 
@@ -199,9 +199,13 @@ xlabel('Time');
 ylabel('Amplitude');
 grid on;
 hold on;
-plot(loc_re, length3, 'LineWidth', 1.5);
+plot(loc_re, rec_signal, 'LineWidth', 1.5);
 legend('Original Signal', 'Reconstructed Signal');
 %%%
+% As we delete the first three detailed coefficient we are omitting
+% higher frequencies of our signal ,that's why we are seeing ,
+% signal near 0 isn't oscillating much.
+%
 % Part 10:
 %
 % Here we want to denoise the signal and compare it with original and noisy signal
